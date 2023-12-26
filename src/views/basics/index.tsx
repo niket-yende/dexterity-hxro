@@ -30,6 +30,18 @@ export const BasicsView: FC = ({ }) => {
           clusterApiUrl(network)
 
     // Fetch for the Manifest
+    // Constructing our DexterityWallet from the Solana Wallet Adapter
+		const wallet: DexterityWallet = {
+      publicKey: publicKey!,
+      signTransaction,
+      signAllTransactions,
+    }
+
+		// Fetching the Manifest
+		const manifest = await dexterity.getManifest(rpc, true, wallet)
+
+		// Setting our Manifest with our Global Context
+		setManifest(manifest)
 
   }, [publicKey, network]);
 
